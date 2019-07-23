@@ -1,0 +1,45 @@
+{
+    "name": "friendsmore\/laravel-wechatpay-v3",
+    "description": "用于 Laravel/Lumen 框架的微信支付 API v3 组件",
+    "authors": [
+        {
+            "name": "Freez",
+            "email": "freez.fang@friendsmore.cn"
+        }
+    ],
+    "require": {
+        "ext-json": "^1.6",
+        "ext-openssl": "*",
+        "php": "^7.1",
+        "illuminate/support": "^5.7",
+        "illuminate/container": "^5.7",
+        "illuminate/translation": "^5.7",
+        "guzzlehttp/guzzle": "^6.3",
+        "pimple/pimple": "~3.0",
+        "ext-curl": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": ">=7.0",
+        "orchestra/testbench": "^3.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "LaravelWechatpayV3\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "LaravelWechatpayV3\\Test\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "LaravelWechatpayV3\\ServiceProvider"
+            ],
+            "aliases": {
+                "OCR": "LaravelWechatpayV3\\Facade"
+            }
+        }
+    }
+}
