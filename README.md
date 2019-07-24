@@ -33,7 +33,7 @@ $wechatPay->certificate->all($query, $options);
 $wechatPay->notify->parseResponse($response);
 
 // 上传媒体文件
-$wechatPay->media->upload($file, $options);
+$wechatPay->media->upload($fileName, $content, $mimeType, $options);
 
 // 子商户入驻（申请）
 $wechatPay->applyment->create($params, $options);
