@@ -1,6 +1,6 @@
-# laravel-ultimatemusic
+# laravel-wechatpay-v3
 
-用于 Laravel 框架的爱听卓乐音乐组件
+用于 Laravel/Lumen 框架的微信支付 V3 的 API
 
 ## 安装
 不低于 Laravel 5.7
