@@ -2,6 +2,8 @@
 
 namespace LaravelWechatpayV3\Service\CombineTransaction;
 
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Str;
 use LaravelWechatpayV3\Kernel\BaseClient;
 
 /**
@@ -9,6 +11,11 @@ use LaravelWechatpayV3\Kernel\BaseClient;
  */
 class Client extends BaseClient
 {
+    public static function className()
+    {
+        return 'combine-transactions';
+    }
+
     /**
      * @param array $params
      * @param array $options
@@ -18,7 +25,7 @@ class Client extends BaseClient
      */
     public function createByApp(array $params, array $options = [])
     {
-        return $this->create('app', $params, $options);
+        return $this->createByChannel('app', $params, $options);
     }
 
     /**
@@ -29,17 +36,12 @@ class Client extends BaseClient
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Throwable
      */
-    public function create(string $channel, array $params, array $options = [])
+    public function createByChannel(string $channel, array $params, array $options = [])
     {
         $url = self::classUrl().$channel;
         $opts = $options + ['json' => $params];
 
         return $this->request('POST', $url, $opts);
-    }
-
-    public static function className()
-    {
-        return '/combine-transactions';
     }
 
     /**
@@ -51,7 +53,7 @@ class Client extends BaseClient
      */
     public function createByJsApi(array $params, array $options = [])
     {
-        return $this->create('jsapi', $params, $options);
+        return $this->createByChannel('jsapi', $params, $options);
     }
 
     /**
@@ -84,5 +86,54 @@ class Client extends BaseClient
         $opts = $options + ['query' => $query];
 
         return $this->request('POST', $url, $opts);
+    }
+
+    /**
+     * @param $appId
+     * @param $timestamp
+     * @param $prepayId
+     */
+    public function generateAppPayInfo($appId, $timestamp, $prepayId, $subMerchantId)
+    {
+        $payload = [
+            'appId' => $appId,
+            'timeStamp' => strval($timestamp),
+            'nonceStr' => Str::random(32),
+            'prepayId' => $prepayId,
+        ];
+        $signData = implode("\n", $payload)."\n";
+        $clientKey = Config::get('wechatpay-v3.private_key');
+        openssl_sign($signData, $sign, $clientKey, OPENSSL_ALGO_SHA256);
+        $payload += [
+            'partnerId' => $subMerchantId,
+            'packageValue' => 'Sign=WXPay',
+            'paySign' => base64_encode($sign),
+        ];
+
+        return $payload;
+    }
+
+    /**
+     * @param $appId
+     * @param $timestamp
+     * @param $prepayId
+     */
+    public function generateJsApiPayInfo($appId, $timestamp, $prepayId)
+    {
+        $payload = [
+            'appId' => $appId,
+            'timeStamp' => strval($timestamp),
+            'nonceStr' => Str::random(32),
+            'package' => 'prepay_id='.$prepayId,
+        ];
+        $signData = implode("\n", $payload)."\n";
+        $clientKey = Config::get('wechatpay-v3.private_key');
+        openssl_sign($signData, $sign, $clientKey, OPENSSL_ALGO_SHA256);
+        $payload += [
+            'signType' => 'RSA',
+            'paySign' => base64_encode($sign),
+        ];
+
+        return $payload;
     }
 }
