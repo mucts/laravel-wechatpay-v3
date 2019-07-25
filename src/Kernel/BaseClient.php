@@ -80,9 +80,6 @@ class BaseClient
 
     protected function registerHttpMiddleware()
     {
-        // retry
-        $this->pushMiddleware($this->retryMiddleware(), 'retry');
-
         // sensitive param
         $this->pushMiddleware($this->sensitiveParamMiddleware(), 'sensitive_param');
 
@@ -90,7 +87,10 @@ class BaseClient
         $this->pushMiddleware($this->authMiddleware(), 'auth');
 
         // verify sign
-//        $this->pushMiddleware($this->verifySignMiddleware(), 'verify_sign');
+        $this->pushMiddleware($this->verifySignMiddleware(), 'verify_sign');
+
+        // retry
+        $this->pushMiddleware($this->retryMiddleware(), 'retry');
     }
 
     /**

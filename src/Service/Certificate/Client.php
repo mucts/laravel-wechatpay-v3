@@ -16,10 +16,11 @@ class Client extends BaseClient
 
     protected function registerHttpMiddleware()
     {
+        // auth
+        $this->pushMiddleware($this->authMiddleware(), 'auth');
+
         // retry
         $this->pushMiddleware($this->retryMiddleware(), 'retry');
 
-        // auth
-        $this->pushMiddleware($this->authMiddleware(), 'auth');
     }
 }

@@ -69,7 +69,11 @@ trait SignatureGenerator
         $responseSign = base64_decode(Arr::get($headers, 'Wechatpay-Signature.0'));
         $serialNo = Arr::get($headers, 'Wechatpay-Serial.0');
         if (empty($serialNo)) {
-            throw new SignInvalidException('响应中不存在证书序列号');
+            if (substr(strval($response->getStatusCode()), 0, 1) == '2') {
+                throw new SignInvalidException('响应中不存在证书序列号');
+            }
+
+            return true;
         }
         $publicKey = (new Certificate($this->app))->getPublicKey($serialNo);
 
