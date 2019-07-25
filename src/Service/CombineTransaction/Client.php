@@ -101,13 +101,10 @@ class Client extends BaseClient
             'nonceStr' => Str::random(32),
             'prepayId' => $prepayId,
         ];
-        $signData = implode("\n", $payload)."\n";
-        $clientKey = Config::get('wechatpay-v3.private_key');
-        openssl_sign($signData, $sign, $clientKey, OPENSSL_ALGO_SHA256);
         $payload += [
             'partnerId' => $subMerchantId,
             'packageValue' => 'Sign=WXPay',
-            'paySign' => base64_encode($sign),
+            'paySign' => $this->sign($payload),
         ];
 
         return $payload;
@@ -126,12 +123,9 @@ class Client extends BaseClient
             'nonceStr' => Str::random(32),
             'package' => 'prepay_id='.$prepayId,
         ];
-        $signData = implode("\n", $payload)."\n";
-        $clientKey = Config::get('wechatpay-v3.private_key');
-        openssl_sign($signData, $sign, $clientKey, OPENSSL_ALGO_SHA256);
         $payload += [
             'signType' => 'RSA',
-            'paySign' => base64_encode($sign),
+            'paySign' => $this->sign($payload),
         ];
 
         return $payload;
