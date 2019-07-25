@@ -4,18 +4,22 @@ namespace LaravelWechatpayV3\Kernel;
 
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Promise\Promise;
+use GuzzleHttp\Psr7;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
 use LaravelWechatpayV3\Kernel\Exceptions\SignInvalidException;
+use LaravelWechatpayV3\Kernel\Traits\Certificate;
 use LaravelWechatpayV3\Kernel\Traits\HasHttpRequests;
 use LaravelWechatpayV3\Kernel\Traits\ResponseCastable;
 use LaravelWechatpayV3\Kernel\Traits\RestfulMethods;
 use LaravelWechatpayV3\Kernel\Traits\SignatureGenerator;
+use LaravelWechatpayV3\Kernel\Utils\RsaUtil;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 class BaseClient
 {
-    use RestfulMethods, ResponseCastable, SignatureGenerator, HasHttpRequests {
+    use Certificate, RestfulMethods, ResponseCastable, SignatureGenerator, HasHttpRequests {
         request as performRequest;
     }
 
@@ -54,11 +58,7 @@ class BaseClient
      */
     protected function request(string $method, string $url, array $options = [])
     {
-        if (empty($this->middlewares)) {
-            $this->registerHttpMiddleware();
-        }
-
-        $response = $this->performRequest($url, $method, $options);
+        $response = $this->requestRaw($method, $url, $options);
 
         return $this->castResponse($response);
     }
@@ -76,9 +76,7 @@ class BaseClient
             $this->registerHttpMiddleware();
         }
 
-        $response = $this->performRequest($url, $method, $options);
-
-        return $response;
+        return $this->performRequest($url, $method, $options);
     }
 
     protected function registerHttpMiddleware()
@@ -86,11 +84,14 @@ class BaseClient
         // retry
         $this->pushMiddleware($this->retryMiddleware(), 'retry');
 
+        // sensitive param
+        $this->pushMiddleware($this->sensitiveParamMiddleware(), 'sensitive_param');
+
         // auth
         $this->pushMiddleware($this->authMiddleware(), 'auth');
 
         // verify sign
-        $this->pushMiddleware($this->verifySignMiddleware(), 'verify_sign');
+//        $this->pushMiddleware($this->verifySignMiddleware(), 'verify_sign');
     }
 
     /**
@@ -132,9 +133,72 @@ class BaseClient
                 array $options
             ) use ($handler) {
                 $request = $request->withHeader('Accept', 'application/json');
-                $request = $request->withHeader('Authorization', $this->authHeader($request, $options));
+                $auth = $this->authHeader($request, $options);
+                $request = $request->withHeader('Authorization', $auth);
 
                 return $handler($request, $options);
+            };
+        };
+    }
+
+    /**
+     * Encrypt/Decrypt sensitive param
+     *
+     * @return \Closure
+     */
+    protected function sensitiveParamMiddleware()
+    {
+        return function (callable $handler) {
+            return function (
+                RequestInterface $request,
+                array $options
+            ) use ($handler) {
+                $encodeParams = Arr::get($options, 'encode_params', []);
+                if (!empty($encodeParams)) {
+                    $body = $request->getBody()->getContents();
+                    $request->getBody()->rewind();
+                    $params = json_decode($body, true);
+                    if (!empty($params)) {
+                        $serialNo = $this->getAvailableSerialNo();
+                        foreach ($encodeParams as $encodeParam) {
+                            $value = Arr::get($params, $encodeParam);
+                            if (!is_null($value)) {
+                                $encrypted = RsaUtil::publicEncrypt(
+                                    $value,
+                                    $this->getPublicKey($serialNo)
+                                );
+                                Arr::set($params, $encodeParam, $encrypted);
+                            }
+                        }
+                        $request = $request->withBody(Psr7\stream_for(json_encode($params)));
+                    }
+                    $request = $request->withHeader('Wechatpay-Serial', $serialNo);
+                }
+
+                /** @var ResponseInterface $response */
+                $response = $handler($request, $options);
+                $decodeParams = Arr::get($options, 'decode_params', []);
+                if (!empty($decodeParams)) {
+                    $body = $response->getBody()->getContents();
+                    $response->getBody()->rewind();
+                    $params = json_decode($body, true);
+                    if (!empty($params)) {
+                        foreach ($decodeParams as $decodeParam) {
+                            $value = Arr::get($params, $decodeParam);
+                            if (!is_null($value)) {
+                                $decryptedValue = RsaUtil::privateDecrypt(
+                                    $value,
+                                    Config::get('wechatpay-v3.private_key')
+                                );
+
+                                Arr::set($params, $decodeParam, $decryptedValue);
+                            }
+                        }
+                        $response = $response->withBody(Psr7\stream_for(json_encode($params)));
+                    }
+                }
+
+                return $response;
             };
         };
     }

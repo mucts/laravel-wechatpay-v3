@@ -23,7 +23,7 @@ trait RestfulMethods
 
     public static function classUrl()
     {
-        return '/v3/'.static::className();
+        return '/v3/'.static::className().'/';
     }
 
     public static function className()
@@ -56,7 +56,7 @@ trait RestfulMethods
 
     public function instanceUrl($id)
     {
-        return self::classUrl().'/'.$id;
+        return self::classUrl().$id;
     }
 
     /**

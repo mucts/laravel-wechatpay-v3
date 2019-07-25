@@ -31,7 +31,7 @@ class Client extends BaseClient
      */
     public function create(string $channel, array $params, array $options = [])
     {
-        $url = self::classUrl().'/'.$channel;
+        $url = self::classUrl().$channel;
         $opts = $options + ['json' => $params];
 
         return $this->request('POST', $url, $opts);
@@ -64,7 +64,7 @@ class Client extends BaseClient
      */
     public function retrieveByOutTradeNo(string $outTradeNo, string $query = null, array $options = [])
     {
-        $url = self::classUrl().'/out-trade-no/'.$outTradeNo;;
+        $url = self::classUrl().'out-trade-no/'.$outTradeNo;
         $opts = $options + ['query' => $query];
 
         return $this->request('GET', $url, $opts);
@@ -80,7 +80,7 @@ class Client extends BaseClient
      */
     public function closeByOutTradeNo(string $outTradeNo, string $query = null, array $options = [])
     {
-        $url = self::classUrl().'/out-trade-no/'.$outTradeNo.'/close';
+        $url = self::classUrl().'out-trade-no/'.$outTradeNo.'/close';
         $opts = $options + ['query' => $query];
 
         return $this->request('POST', $url, $opts);

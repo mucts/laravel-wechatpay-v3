@@ -18,7 +18,7 @@ class Client extends BaseClient
      */
     public function create(array $params, array $options = [])
     {
-        $url = self::classUrl().'/apply';
+        $url = self::classUrl().'apply';
         $opts = $options + ['json' => $params];
 
         return $this->request('POST', $url, $opts);
@@ -34,7 +34,7 @@ class Client extends BaseClient
      */
     public function retrieveByOutRefundNo(string $outRefundNo, string $query = null, array $options = [])
     {
-        $url = self::classUrl().'/out-trade-no/'.$outRefundNo;;
+        $url = self::classUrl().'out-trade-no/'.$outRefundNo;;
         $opts = $options + ['query' => $query];
 
         return $this->request('GET', $url, $opts);
@@ -50,7 +50,7 @@ class Client extends BaseClient
      */
     public function retrieve(string $id, string $query = null, array $options = [])
     {
-        $url = self::classUrl().'/id/'.$id;;
+        $url = self::classUrl().'id/'.$id;;
         $opts = $options + ['query' => $query];
 
         return $this->request('GET', $url, $opts);
