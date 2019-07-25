@@ -1,29 +1,46 @@
 <?php
 
-namespace LaravelWechatpayV3\Kernel\Traits;
+namespace LaravelWechatpayV3\Kernel;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 use LaravelWechatpayV3\Kernel\Exceptions\DecryptException;
+use LaravelWechatpayV3\Kernel\Exceptions\InvalidArgumentException;
+use LaravelWechatpayV3\Kernel\Exceptions\RuntimeException;
 use LaravelWechatpayV3\Kernel\Exceptions\SignInvalidException;
 use LaravelWechatpayV3\Kernel\Utils\AesUtil;
 use LaravelWechatpayV3\Service\Certificate\Client;
+use Pimple\Container;
 
-Trait Certificate
+class Certificate
 {
-    private $certificateCachePrefix = 'laravel-wechatpay-v3.kernel.certificate.';
-    private $serialNoCache = 'laravel-wechatpay-v3.kernel.serial-no';
+    const CERTIFICATE_CACHE_PREFIX = 'laravel-wechatpay-v3.kernel.certificate.';
+    const SERIAL_NUMBER_CACHE = 'laravel-wechatpay-v3.kernel.serial-no';
+
+    /**
+     * @var \Pimple\Container
+     */
+    protected $app;
+
+    /**
+     * Certificate constructor.
+     * @param Container $app
+     */
+    public function __construct(Container $app)
+    {
+        $this->app = $app;
+    }
 
     /**
      * @return mixed
      */
-    private function getAvailableSerialNo()
+    public function getAvailableSerialNo()
     {
         $ttl = Carbon::now()->addHours(12);
 
-        return Cache::remember($this->serialNoCache, $ttl, function () use ($ttl) {
+        return Cache::remember(self::SERIAL_NUMBER_CACHE, $ttl, function () use ($ttl) {
             /** @var Client $certificateClient */
             $certificateClient = $this->app['certificate'];
             $certificates = collect(Arr::get($certificateClient->all(), 'data'));
@@ -55,8 +72,8 @@ Trait Certificate
      * @param $encryptCertificate
      * @param $aesKey
      * @return bool|string
-     * @throws \LaravelWechatpayV3\Kernel\Exceptions\InvalidArgumentException
-     * @throws \LaravelWechatpayV3\Kernel\Exceptions\RuntimeException
+     * @throws InvalidArgumentException
+     * @throws RuntimeException
      * @throws DecryptException
      */
     private function decryptCertificate($encryptCertificate, $aesKey)
@@ -78,7 +95,7 @@ Trait Certificate
      */
     private function getPublicKeyCacheKey($serialNo)
     {
-        return $this->certificateCachePrefix.$serialNo;
+        return self::CERTIFICATE_CACHE_PREFIX.$serialNo;
     }
 
     /**
@@ -86,7 +103,7 @@ Trait Certificate
      * @return mixed
      * @throws SignInvalidException
      */
-    private function getPublicKey($serialNo)
+    public function getPublicKey($serialNo)
     {
         $ttl = Carbon::now()->addHours(12);
 
@@ -100,7 +117,7 @@ Trait Certificate
             }
             $aesKey = Config::get('wechatpay-v3.aes_key', '');
             $publicKey = $this->decryptCertificate(Arr::get($certificate, 'encrypt_certificate'), $aesKey);
-            Cache::put($this->serialNoCache, $serialNo, $ttl);
+            Cache::put(self::SERIAL_NUMBER_CACHE, $serialNo, $ttl);
 
             return $publicKey;
         });

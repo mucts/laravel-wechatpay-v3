@@ -5,14 +5,13 @@ namespace LaravelWechatpayV3\Kernel\Traits;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Str;
+use LaravelWechatpayV3\Kernel\Certificate;
 use LaravelWechatpayV3\Kernel\Exceptions\SignInvalidException;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 trait SignatureGenerator
 {
-    use Certificate;
-
     protected $authType = 'WECHATPAY2-SHA256-RSA2048';
 
     /**
@@ -72,7 +71,7 @@ trait SignatureGenerator
         if (empty($serialNo)) {
             throw new SignInvalidException('响应中不存在证书序列号');
         }
-        $publicKey = $this->getPublicKey($serialNo);
+        $publicKey = (new Certificate($this->app))->getPublicKey($serialNo);
 
         return boolval(openssl_verify(
             $signData,

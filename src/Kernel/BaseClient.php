@@ -8,7 +8,6 @@ use GuzzleHttp\Psr7;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
 use LaravelWechatpayV3\Kernel\Exceptions\SignInvalidException;
-use LaravelWechatpayV3\Kernel\Traits\Certificate;
 use LaravelWechatpayV3\Kernel\Traits\HasHttpRequests;
 use LaravelWechatpayV3\Kernel\Traits\ResponseCastable;
 use LaravelWechatpayV3\Kernel\Traits\RestfulMethods;
@@ -19,7 +18,7 @@ use Psr\Http\Message\ResponseInterface;
 
 class BaseClient
 {
-    use Certificate, RestfulMethods, ResponseCastable, SignatureGenerator, HasHttpRequests {
+    use RestfulMethods, ResponseCastable, SignatureGenerator, HasHttpRequests {
         request as performRequest;
     }
 
@@ -121,27 +120,6 @@ class BaseClient
     }
 
     /**
-     * Attache auth to the request header.
-     *
-     * @return \Closure
-     */
-    protected function authMiddleware()
-    {
-        return function (callable $handler) {
-            return function (
-                RequestInterface $request,
-                array $options
-            ) use ($handler) {
-                $request = $request->withHeader('Accept', 'application/json');
-                $auth = $this->authHeader($request, $options);
-                $request = $request->withHeader('Authorization', $auth);
-
-                return $handler($request, $options);
-            };
-        };
-    }
-
-    /**
      * Encrypt/Decrypt sensitive param
      *
      * @return \Closure
@@ -159,13 +137,14 @@ class BaseClient
                     $request->getBody()->rewind();
                     $params = json_decode($body, true);
                     if (!empty($params)) {
-                        $serialNo = $this->getAvailableSerialNo();
+                        $certificate = (new Certificate($this->app));
+                        $serialNo = $certificate->getAvailableSerialNo();
                         foreach ($encodeParams as $encodeParam) {
                             $value = Arr::get($params, $encodeParam);
                             if (!is_null($value)) {
                                 $encrypted = RsaUtil::publicEncrypt(
                                     $value,
-                                    $this->getPublicKey($serialNo)
+                                    $certificate->getPublicKey($serialNo)
                                 );
                                 Arr::set($params, $encodeParam, $encrypted);
                             }
@@ -199,6 +178,27 @@ class BaseClient
                 }
 
                 return $response;
+            };
+        };
+    }
+
+    /**
+     * Attache auth to the request header.
+     *
+     * @return \Closure
+     */
+    protected function authMiddleware()
+    {
+        return function (callable $handler) {
+            return function (
+                RequestInterface $request,
+                array $options
+            ) use ($handler) {
+                $request = $request->withHeader('Accept', 'application/json');
+                $auth = $this->authHeader($request, $options);
+                $request = $request->withHeader('Authorization', $auth);
+
+                return $handler($request, $options);
             };
         };
     }
