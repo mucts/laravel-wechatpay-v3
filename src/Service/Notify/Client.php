@@ -14,7 +14,7 @@ class Client extends BaseClient
 {
     /**
      * @param array $resource
-     * @return array|mixed
+     * @return array
      * @throws \LaravelWechatpayV3\Kernel\Exceptions\InvalidArgumentException
      * @throws \LaravelWechatpayV3\Kernel\Exceptions\RuntimeException
      */
@@ -25,6 +25,8 @@ class Client extends BaseClient
         $nonceStr = Arr::get($resource, 'nonce');
         $cipherText = Arr::get($resource, 'ciphertext');
 
-        return (new AesUtil($aesKey))->decryptAES256GCM($associatedData, $nonceStr, $cipherText);
+        $data = (new AesUtil($aesKey))->decryptAES256GCM($associatedData, $nonceStr, $cipherText);
+
+        return \json_decode($data, true);
     }
 }
