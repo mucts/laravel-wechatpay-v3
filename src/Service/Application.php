@@ -16,8 +16,8 @@ use LaravelWechatpayV3\Kernel\ServiceContainer;
  * @property \LaravelWechatpayV3\Service\Ecommerce\ProfitSharing\ReturnOrder\Client $profitSharingReturnOrder
  * @property \LaravelWechatpayV3\Service\Ecommerce\ProfitSharing\FinishOrder\Client $profitSharingFinishOrder
  * @property \LaravelWechatpayV3\Service\Ecommerce\Refund\Client $refund
- * @property \LaravelWechatpayV3\Service\Fund\Withdraw\Client $withdraw
- * @property \LaravelWechatpayV3\Service\Fund\Balance\Client $balance
+ * @property \LaravelWechatpayV3\Service\Ecommerce\Fund\Withdraw\Client $withdraw
+ * @property \LaravelWechatpayV3\Service\Ecommerce\Fund\Balance\Client $balance
  * @property \LaravelWechatpayV3\Service\Bill\Client $bill
  */
 class Application extends ServiceContainer
@@ -35,8 +35,8 @@ class Application extends ServiceContainer
         Ecommerce\ProfitSharing\ReturnOrder\ServiceProvider::class,
         Ecommerce\ProfitSharing\FinishOrder\ServiceProvider::class,
         Ecommerce\Refund\ServiceProvider::class,
-        Fund\Withdraw\ServiceProvider::class,
-        Fund\Balance\ServiceProvider::class,
+        Ecommerce\Fund\Withdraw\ServiceProvider::class,
+        Ecommerce\Fund\Balance\ServiceProvider::class,
         Bill\ServiceProvider::class,
     ];
 }

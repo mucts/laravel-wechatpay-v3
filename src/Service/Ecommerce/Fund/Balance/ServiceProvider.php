@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelWechatpayV3\Service\Fund\Withdraw;
+namespace LaravelWechatpayV3\Service\Ecommerce\Fund\Balance;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
@@ -12,7 +12,7 @@ class ServiceProvider implements ServiceProviderInterface
      */
     public function register(Container $app)
     {
-        $app['withdraw'] = function ($app) {
+        $app['balance'] = function ($app) {
             return new Client($app);
         };
     }

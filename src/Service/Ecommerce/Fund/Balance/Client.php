@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelWechatpayV3\Service\Fund\Balance;
+namespace LaravelWechatpayV3\Service\Ecommerce\Fund\Balance;
 
 use LaravelWechatpayV3\Kernel\BaseClient;
 
@@ -24,6 +24,6 @@ class Client extends BaseClient
 
     public static function className()
     {
-        return 'fund/balance';
+        return 'ecommerce/fund/balance';
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelWechatpayV3\Service\Fund\Withdraw;
+namespace LaravelWechatpayV3\Service\Ecommerce\Fund\Withdraw;
 
 use LaravelWechatpayV3\Kernel\BaseClient;
 
@@ -36,6 +36,6 @@ class Client extends BaseClient
 
     public static function className()
     {
-        return 'fund/withdraw';
+        return 'ecommerce/fund/withdraw';
     }
 }
