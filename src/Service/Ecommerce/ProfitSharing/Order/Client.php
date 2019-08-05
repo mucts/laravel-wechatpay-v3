@@ -10,13 +10,13 @@ use LaravelWechatpayV3\Kernel\BaseClient;
 class Client extends BaseClient
 {
     /**
-     * @param string|null $query
+     * @param array|null $query
      * @param array $options
      * @return mixed|\Psr\Http\Message\ResponseInterface
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Throwable
      */
-    public function retrieveByOrder(string $query = null, array $options = [])
+    public function retrieveByOrder(array $query = null, array $options = [])
     {
         $url = self::classUrl();
         $opts = $options + ['query' => $query];

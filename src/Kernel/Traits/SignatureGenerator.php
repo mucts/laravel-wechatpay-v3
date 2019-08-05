@@ -15,28 +15,15 @@ trait SignatureGenerator
     protected $authType = 'WECHATPAY2-SHA256-RSA2048';
 
     /**
-     * 根据商户私钥生成签名
-     *
-     * @param array $payload
-     * @return string
-     */
-    public function sign(array $payload)
-    {
-        $signData = implode("\n", $payload)."\n";
-        $clientKey = Config::get('wechatpay-v3.private_key');
-        openssl_sign($signData, $sign, $clientKey, OPENSSL_ALGO_SHA256);
-
-        return base64_encode($sign);
-    }
-
-    /**
      * 生成请求需要的头部签名（放置在请求的头部）
      */
     protected function authHeader(RequestInterface $request, array $options)
     {
+        $uri = $request->getUri()->getPath();
+        $request->getUri()->getQuery() && $uri .= ('?'.$request->getUri()->getQuery());
         $payload = [
             'method' => strtoupper($request->getMethod()),
-            'uri' => $request->getUri()->getPath(),
+            'uri' => $uri,
             'timestamp' => time(),
             'nonce_str' => strtoupper(Str::random(32)),
             'body' => Arr::get($options, 'sign_payload', function () use ($request) {
@@ -56,6 +43,21 @@ trait SignatureGenerator
             $payload['timestamp'],
             $this->sign($payload),
         ]);
+    }
+
+    /**
+     * 根据商户私钥生成签名
+     *
+     * @param array $payload
+     * @return string
+     */
+    public function sign(array $payload)
+    {
+        $signData = implode("\n", $payload)."\n";
+        $clientKey = Config::get('wechatpay-v3.private_key');
+        openssl_sign($signData, $sign, $clientKey, OPENSSL_ALGO_SHA256);
+
+        return base64_encode($sign);
     }
 
     /**
