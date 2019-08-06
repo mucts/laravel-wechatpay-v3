@@ -5,6 +5,8 @@ namespace LaravelWechatpayV3\Kernel\Traits;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\HandlerStack;
+use Illuminate\Container\Container;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
 use Psr\Http\Message\ResponseInterface;
 
@@ -50,38 +52,6 @@ trait HasHttpRequests
     public static function getDefaultOptions(): array
     {
         return self::$defaults;
-    }
-
-    /**
-     * Return GuzzleHttp\ClientInterface instance.
-     *
-     * @return ClientInterface
-     */
-    public function getHttpClient(): ClientInterface
-    {
-        if (!($this->httpClient instanceof ClientInterface)) {
-            if (class_exists('guzzle')) {
-                $this->httpClient = App::make('guzzle');
-            } else {
-                $this->httpClient = new Client();
-            }
-        }
-
-        return $this->httpClient;
-    }
-
-    /**
-     * Set GuzzleHttp\Client.
-     *
-     * @param \GuzzleHttp\ClientInterface $httpClient
-     *
-     * @return $this
-     */
-    public function setHttpClient(ClientInterface $httpClient)
-    {
-        $this->httpClient = $httpClient;
-
-        return $this;
     }
 
     /**
@@ -180,6 +150,11 @@ trait HasHttpRequests
      */
     protected function getGuzzleHandler()
     {
+        $handler = Arr::get($this->getHttpClient()->getConfig(), 'handler');
+        if ($handler instanceof HandlerStack) {
+            return $handler;
+        }
+
         if (property_exists($this, 'app') && isset($this->app['guzzle_handler'])) {
             return is_string($handler = $this->app->raw('guzzle_handler'))
                 ? new $handler()
@@ -187,6 +162,40 @@ trait HasHttpRequests
         }
 
         return \GuzzleHttp\choose_handler();
+    }
+
+    /**
+     * Return GuzzleHttp\ClientInterface instance.
+     *
+     * @return ClientInterface
+     */
+    public function getHttpClient(): ClientInterface
+    {
+        if ($this->httpClient instanceof ClientInterface) {
+            return $this->httpClient;
+        }
+
+        if (Container::getInstance()->has('guzzle')) {
+            $this->httpClient = App::make('guzzle');
+        } else {
+            $this->httpClient = new Client();
+        }
+
+        return $this->httpClient;
+    }
+
+    /**
+     * Set GuzzleHttp\Client.
+     *
+     * @param \GuzzleHttp\ClientInterface $httpClient
+     *
+     * @return $this
+     */
+    public function setHttpClient(ClientInterface $httpClient)
+    {
+        $this->httpClient = $httpClient;
+
+        return $this;
     }
 
     /**
