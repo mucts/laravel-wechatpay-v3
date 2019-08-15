@@ -58,13 +58,13 @@ class Client extends BaseClient
 
     /**
      * @param string $outRefundNo
-     * @param string|null $query
+     * @param string|array|null $query
      * @param array $options
      * @return mixed|\Psr\Http\Message\ResponseInterface
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Throwable
      */
-    public function retrieveByOutTradeNo(string $outTradeNo, string $query = null, array $options = [])
+    public function retrieveByOutTradeNo(string $outTradeNo, $query = null, array $options = [])
     {
         $url = self::classUrl().'out-trade-no/'.$outTradeNo;
         $opts = $options + ['query' => $query];
@@ -74,13 +74,13 @@ class Client extends BaseClient
 
     /**
      * @param string $outTradeNo
-     * @param string|null $query
+     * @param string|array|null $query
      * @param array $options
      * @return mixed|\Psr\Http\Message\ResponseInterface
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Throwable
      */
-    public function closeByOutTradeNo(string $outTradeNo, string $query = null, array $options = [])
+    public function closeByOutTradeNo(string $outTradeNo, $query = null, array $options = [])
     {
         $url = self::classUrl().'out-trade-no/'.$outTradeNo.'/close';
         $opts = $options + ['query' => $query];

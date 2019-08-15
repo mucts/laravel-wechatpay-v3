@@ -11,13 +11,13 @@ class Client extends BaseClient
 {
     /**
      * @param string $id
-     * @param string|null $query
+     * @param string|array|null $query
      * @param array $options
      * @return mixed|\Psr\Http\Message\ResponseInterface
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Throwable
      */
-    public function retrieve(string $id, string $query = null, array $options = [])
+    public function retrieve(string $id, $query = null, array $options = [])
     {
         return parent::retrieve($id, $query, $options);
     }

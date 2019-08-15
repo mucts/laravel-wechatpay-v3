@@ -26,13 +26,13 @@ class Client extends BaseClient
 
     /**
      * @param string $outRefundNo
-     * @param string|null $query
+     * @param string|array|null $query
      * @param array $options
      * @return mixed|\Psr\Http\Message\ResponseInterface
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Throwable
      */
-    public function retrieveByOutRefundNo(string $outRefundNo, string $query = null, array $options = [])
+    public function retrieveByOutRefundNo(string $outRefundNo, $query = null, array $options = [])
     {
         $url = self::classUrl().'out-refund-no/'.$outRefundNo;;
         $opts = $options + ['query' => $query];
@@ -42,13 +42,13 @@ class Client extends BaseClient
 
     /**
      * @param string $id
-     * @param string|null $query
+     * @param string|array|null $query
      * @param array $options
      * @return mixed|\Psr\Http\Message\ResponseInterface
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Throwable
      */
-    public function retrieve(string $id, string $query = null, array $options = [])
+    public function retrieve(string $id, $query = null, array $options = [])
     {
         $url = self::classUrl().'id/'.$id;;
         $opts = $options + ['query' => $query];

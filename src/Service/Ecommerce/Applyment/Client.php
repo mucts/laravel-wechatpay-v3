@@ -9,7 +9,7 @@ use LaravelWechatpayV3\Kernel\BaseClient;
  */
 class Client extends BaseClient
 {
-    public function retrieve(string $id, string $query = null, array $options = [])
+    public function retrieve(string $id, $query = null, array $options = [])
     {
         return parent::retrieve($id, $query, $options);
     }

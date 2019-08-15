@@ -9,7 +9,7 @@ use LaravelWechatpayV3\Kernel\BaseClient;
  */
 class Client extends BaseClient
 {
-    public function all(string $query = null, array $options = [])
+    public function all($query = null, array $options = [])
     {
         return parent::all($query, $options);
     }

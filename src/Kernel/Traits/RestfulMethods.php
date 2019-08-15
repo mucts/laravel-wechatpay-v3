@@ -7,13 +7,13 @@ use Illuminate\Support\Str;
 trait RestfulMethods
 {
     /**
-     * @param string|null $query
+     * @param string|array|null $query
      * @param array $options
      * @return mixed|\Psr\Http\Message\ResponseInterface
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Throwable
      */
-    protected function all(string $query = null, array $options = [])
+    protected function all($query = null, array $options = [])
     {
         $url = self::classUrl();
         $opts = $options + ['query' => $query];
@@ -46,7 +46,7 @@ trait RestfulMethods
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Throwable
      */
-    protected function retrieve(string $subMerchantId, string $query = null, array $options = [])
+    protected function retrieve(string $subMerchantId, $query = null, array $options = [])
     {
         $url = $this->instanceUrl($subMerchantId);
         $opts = $options + ['query' => $query];

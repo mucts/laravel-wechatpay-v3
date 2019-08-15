@@ -18,13 +18,13 @@ class Client extends BaseClient
 
     /**
      * @param string $id
-     * @param string|null $query
+     * @param string|array|null $query
      * @param array $options
      * @return mixed|\Psr\Http\Message\ResponseInterface
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Throwable
      */
-    public function retrieveTradeBill(string $query = null, array $options = [])
+    public function retrieveTradeBill($query = null, array $options = [])
     {
         $url = self::classUrl().'tradebill';
         $opts = $options + ['query' => $query];
@@ -34,13 +34,13 @@ class Client extends BaseClient
 
     /**
      * @param string $id
-     * @param string|null $query
+     * @param string|array|null $query
      * @param array $options
      * @return mixed|\Psr\Http\Message\ResponseInterface
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Throwable
      */
-    public function retrieveFundFlowBill(string $query = null, array $options = [])
+    public function retrieveFundFlowBill($query = null, array $options = [])
     {
         $url = self::classUrl().'fundflowbill';
         $opts = $options + ['query' => $query];
