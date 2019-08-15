@@ -34,7 +34,7 @@ class Client extends BaseClient
      */
     public function retrieveByOutRefundNo(string $outRefundNo, string $query = null, array $options = [])
     {
-        $url = self::classUrl().'out-trade-no/'.$outRefundNo;;
+        $url = self::classUrl().'out-refund-no/'.$outRefundNo;;
         $opts = $options + ['query' => $query];
 
         return $this->request('GET', $url, $opts);
