@@ -39,16 +39,16 @@ trait RestfulMethods
     }
 
     /**
-     * @param string $subMerchantId
+     * @param string $id
      * @param string $query
      * @param array $options
      * @return mixed|\Psr\Http\Message\ResponseInterface
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Throwable
      */
-    protected function retrieve(string $subMerchantId, $query = null, array $options = [])
+    protected function retrieve(string $id, $query = null, array $options = [])
     {
-        $url = $this->instanceUrl($subMerchantId);
+        $url = $this->instanceUrl($id);
         $opts = $options + ['query' => $query];
 
         return $this->request('GET', $url, $opts);

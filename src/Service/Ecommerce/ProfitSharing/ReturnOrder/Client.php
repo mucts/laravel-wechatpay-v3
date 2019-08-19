@@ -9,7 +9,14 @@ use LaravelWechatpayV3\Kernel\BaseClient;
  */
 class Client extends BaseClient
 {
-    public function retrieve($query = null, array $options = [])
+    /**
+     * @param null $query
+     * @param array $options
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Throwable
+     */
+    public function retrieveByOrder($query = null, array $options = [])
     {
         $url = self::classUrl();
         $opts = $options + ['query' => $query];
@@ -17,6 +24,13 @@ class Client extends BaseClient
         return $this->request('GET', $url, $opts);
     }
 
+    /**
+     * @param array $params
+     * @param array $options
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Throwable
+     */
     public function create(array $params, array $options = [])
     {
         return parent::create($params, $options);
