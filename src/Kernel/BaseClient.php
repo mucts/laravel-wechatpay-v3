@@ -94,32 +94,6 @@ class BaseClient
     }
 
     /**
-     * Return retry middleware.
-     *
-     * @return \Closure
-     */
-    protected function retryMiddleware()
-    {
-        return Middleware::retry(function (
-            $retries,
-            RequestInterface $request,
-            ResponseInterface $response = null
-        ) {
-            if ($retries >= Config::get('http.max_retries', 1)) {
-                return false;
-            }
-
-            if (is_null($response) || !in_array($response->getStatusCode(), [429, 500, 502, 503])) {
-                return false;
-            }
-
-            return true;
-        }, function () {
-            return abs(Config::get('http.retry_delay', 500));
-        });
-    }
-
-    /**
      * Encrypt/Decrypt sensitive param
      *
      * @return \Closure
@@ -229,5 +203,36 @@ class BaseClient
                 );
             };
         };
+    }
+
+    /**
+     * Return retry middleware.
+     *
+     * @return \Closure
+     */
+    protected function retryMiddleware()
+    {
+        return Middleware::retry(function (
+            $retries,
+            RequestInterface $request,
+            ResponseInterface $response = null
+        ) {
+            if ($retries >= Config::get('http.max_retries', 1)) {
+                return false;
+            }
+
+            if (is_null($response) || !in_array($response->getStatusCode(), [429, 500, 502, 503])) {
+                return false;
+            }
+
+            return true;
+        }, function ($retries, ResponseInterface $response) {
+            if ($response->getStatusCode() == 429) {
+                // too many request (FREQUENCY_LIMITED)
+                return $retries * 5000;
+            }
+
+            return abs(Config::get('http.retry_delay', 500));
+        });
     }
 }
