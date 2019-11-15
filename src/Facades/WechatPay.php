@@ -3,14 +3,14 @@
 namespace LaravelWechatpayV3;
 
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Facade as LaravelFacade;
+use Illuminate\Support\Facades\Facade;
 use LaravelWechatpayV3\Service\Application;
 
 /**
- * Class Facade
+ * Class WechatPay
  * @package LaravelWechatpayV3
  */
-class Facade extends LaravelFacade
+class WechatPay extends Facade
 {
     /**
      * @param array $config
