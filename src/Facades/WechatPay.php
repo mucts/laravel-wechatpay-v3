@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelWechatpayV3;
+namespace LaravelWechatpayV3\Facades;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Facade;
