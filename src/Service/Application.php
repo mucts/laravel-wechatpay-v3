@@ -9,6 +9,7 @@ use LaravelWechatpayV3\Kernel\ServiceContainer;
  *
  * @property \LaravelWechatpayV3\Service\Certificate\Client $certificate
  * @property \LaravelWechatpayV3\Service\Notify\Client $notify
+ * @property \LaravelWechatpayV3\Service\Apply4Sub\SubMerchant\Client $subMerchant
  * @property \LaravelWechatpayV3\Service\Merchant\Media\Client $media
  * @property \LaravelWechatpayV3\Service\CombineTransaction\Client $combineTransaction
  * @property \LaravelWechatpayV3\Service\Ecommerce\Applyment\Client $applyment
@@ -29,6 +30,7 @@ class Application extends ServiceContainer
     protected $providers = [
         Certificate\ServiceProvider::class,
         Notify\ServiceProvider::class,
+        Apply4Sub\SubMerchant\ServiceProvider::class,
         Merchant\Media\ServiceProvider::class,
         CombineTransaction\ServiceProvider::class,
         Ecommerce\Applyment\ServiceProvider::class,
