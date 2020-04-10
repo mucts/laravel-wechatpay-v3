@@ -3,8 +3,8 @@
     "description": "用于 Laravel/Lumen 框架的微信支付 API v3 组件",
     "authors": [
         {
-            "name": "Freez",
-            "email": "freez.fang@friendsmore.cn"
+            "name": "Herry",
+            "email": "yuandeng@aliyun.com"
         }
     ],
     "require": {
