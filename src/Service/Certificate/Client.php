@@ -1,8 +1,8 @@
 <?php
 
-namespace LaravelWechatpayV3\Service\Certificate;
+namespace MuCTS\LaravelWeChatPayV3\Service\Certificate;
 
-use LaravelWechatpayV3\Kernel\BaseClient;
+use MuCTS\LaravelWeChatPayV3\Kernel\BaseClient;
 
 /**
  * Class Client.

@@ -1,12 +1,12 @@
 <?php
 
-namespace LaravelWechatpayV3\Kernel\Traits;
+namespace MuCTS\LaravelWeChatPayV3\Kernel\Traits;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Str;
-use LaravelWechatpayV3\Kernel\Certificate;
-use LaravelWechatpayV3\Kernel\Exceptions\SignInvalidException;
+use MuCTS\LaravelWeChatPayV3\Kernel\Certificate;
+use MuCTS\LaravelWeChatPayV3\Kernel\Exceptions\SignInvalidException;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -16,6 +16,9 @@ trait SignatureGenerator
 
     /**
      * 生成请求需要的头部签名（放置在请求的头部）
+     * @param RequestInterface $request
+     * @param array $options
+     * @return string
      */
     protected function authHeader(RequestInterface $request, array $options)
     {

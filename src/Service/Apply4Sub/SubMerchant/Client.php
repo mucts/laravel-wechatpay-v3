@@ -1,8 +1,8 @@
 <?php
 
-namespace LaravelWechatpayV3\Service\Apply4Sub\SubMerchant;
+namespace MuCTS\LaravelWeChatPayV3\Service\Apply4Sub\SubMerchant;
 
-use LaravelWechatpayV3\Kernel\BaseClient;
+use MuCTS\LaravelWeChatPayV3\Kernel\BaseClient;
 
 /**
  * Class Client.

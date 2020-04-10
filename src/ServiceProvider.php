@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelWechatpayV3;
+namespace MuCTS\LaravelWeChatPayV3;
 
 use Illuminate\Foundation\Application as LaravelApplication;
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;

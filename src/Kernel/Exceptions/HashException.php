@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelWechatpayV3\Kernel\Exceptions;
+namespace MuCTS\LaravelWeChatPayV3\Kernel\Exceptions;
 
 class HashException extends Exception
 {

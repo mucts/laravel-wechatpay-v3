@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelWechatpayV3\Service\Bill;
+namespace MuCTS\LaravelWeChatPayV3\Service\Bill;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;

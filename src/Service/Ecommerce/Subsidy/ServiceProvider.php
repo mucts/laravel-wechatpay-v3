@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelWechatpayV3\Service\Ecommerce\Subsidy;
+namespace MuCTS\LaravelWeChatPayV3\Service\Ecommerce\Subsidy;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;

@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelWechatpayV3\Kernel\Utils;
+namespace MuCTS\LaravelWeChatPayV3\Kernel\Utils;
 
 class RsaUtil
 {

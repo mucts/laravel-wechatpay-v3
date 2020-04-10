@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelWechatpayV3\Service\CombineTransaction;
+namespace MuCTS\LaravelWeChatPayV3\Service\CombineTransaction;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;

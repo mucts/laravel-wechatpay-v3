@@ -1,8 +1,8 @@
 <?php
 
-namespace LaravelWechatpayV3\Service\Ecommerce\ProfitSharing\Order;
+namespace MuCTS\LaravelWeChatPayV3\Service\Ecommerce\ProfitSharing\Order;
 
-use LaravelWechatpayV3\Kernel\BaseClient;
+use MuCTS\LaravelWeChatPayV3\Kernel\BaseClient;
 
 /**
  * Class Client.

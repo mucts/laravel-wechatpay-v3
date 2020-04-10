@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelWechatpayV3\Service\Merchant\Media;
+namespace MuCTS\LaravelWeChatPayV3\Service\Merchant\Media;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;

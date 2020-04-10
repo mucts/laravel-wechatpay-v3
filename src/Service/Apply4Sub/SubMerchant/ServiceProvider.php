@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelWechatpayV3\Service\Apply4Sub\SubMerchant;
+namespace MuCTS\LaravelWeChatPayV3\Service\Apply4Sub\SubMerchant;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;

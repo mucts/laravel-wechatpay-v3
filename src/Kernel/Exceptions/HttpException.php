@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelWechatpayV3\Kernel\Exceptions;
+namespace MuCTS\LaravelWeChatPayV3\Kernel\Exceptions;
 
 use Psr\Http\Message\ResponseInterface;
 

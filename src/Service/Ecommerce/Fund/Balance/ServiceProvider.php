@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelWechatpayV3\Service\Ecommerce\Fund\Balance;
+namespace MuCTS\LaravelWeChatPayV3\Service\Ecommerce\Fund\Balance;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;

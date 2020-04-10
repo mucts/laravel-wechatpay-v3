@@ -1,9 +1,9 @@
 <?php
 
-namespace LaravelWechatpayV3\Kernel\Utils;
+namespace MuCTS\LaravelWeChatPayV3\Kernel\Utils;
 
-use LaravelWechatpayV3\Kernel\Exceptions\InvalidArgumentException;
-use LaravelWechatpayV3\Kernel\Exceptions\RuntimeException;
+use MuCTS\LaravelWeChatPayV3\Kernel\Exceptions\InvalidArgumentException;
+use MuCTS\LaravelWeChatPayV3\Kernel\Exceptions\RuntimeException;
 
 class AesUtil
 {

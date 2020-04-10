@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelWechatpayV3\Kernel;
+namespace MuCTS\LaravelWeChatPayV3\Kernel;
 
 use Pimple\Container;
 

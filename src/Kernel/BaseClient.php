@@ -1,18 +1,18 @@
 <?php
 
-namespace LaravelWechatpayV3\Kernel;
+namespace MuCTS\LaravelWeChatPayV3\Kernel;
 
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Psr7;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
-use LaravelWechatpayV3\Kernel\Exceptions\SignInvalidException;
-use LaravelWechatpayV3\Kernel\Traits\HasHttpRequests;
-use LaravelWechatpayV3\Kernel\Traits\ResponseCastable;
-use LaravelWechatpayV3\Kernel\Traits\RestfulMethods;
-use LaravelWechatpayV3\Kernel\Traits\SignatureGenerator;
-use LaravelWechatpayV3\Kernel\Utils\RsaUtil;
+use MuCTS\LaravelWeChatPayV3\Kernel\Exceptions\SignInvalidException;
+use MuCTS\LaravelWeChatPayV3\Kernel\Traits\HasHttpRequests;
+use MuCTS\LaravelWeChatPayV3\Kernel\Traits\ResponseCastable;
+use MuCTS\LaravelWeChatPayV3\Kernel\Traits\RestfulMethods;
+use MuCTS\LaravelWeChatPayV3\Kernel\Traits\SignatureGenerator;
+use MuCTS\LaravelWeChatPayV3\Kernel\Utils\RsaUtil;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -125,7 +125,7 @@ class BaseClient
                         }
                         $request = $request->withBody(Psr7\stream_for(json_encode($params)));
                     }
-                    $request = $request->withHeader('Wechatpay-Serial', $serialNo);
+                    $request = $request->withHeader('WeChatPay-Serial', $serialNo);
                 }
 
                 /** @var ResponseInterface $response */

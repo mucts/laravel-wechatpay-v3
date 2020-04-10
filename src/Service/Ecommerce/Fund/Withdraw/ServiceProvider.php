@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelWechatpayV3\Service\Ecommerce\Fund\Withdraw;
+namespace MuCTS\LaravelWeChatPayV3\Service\Ecommerce\Fund\Withdraw;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;

@@ -1,10 +1,10 @@
 <?php
 
-namespace LaravelWechatpayV3\Service\CombineTransaction;
+namespace MuCTS\LaravelWeChatPayV3\Service\CombineTransaction;
 
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Str;
-use LaravelWechatpayV3\Kernel\BaseClient;
+use MuCTS\LaravelWeChatPayV3\Kernel\BaseClient;
 
 /**
  * Class Client.

@@ -1,11 +1,11 @@
 <?php
 
-namespace LaravelWechatpayV3\Service\Notify;
+namespace MuCTS\LaravelWeChatPayV3\Service\Notify;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
-use LaravelWechatpayV3\Kernel\BaseClient;
-use LaravelWechatpayV3\Kernel\Utils\AesUtil;
+use MuCTS\LaravelWeChatPayV3\Kernel\BaseClient;
+use MuCTS\LaravelWeChatPayV3\Kernel\Utils\AesUtil;
 
 /**
  * Class Client.
@@ -15,8 +15,8 @@ class Client extends BaseClient
     /**
      * @param array $resource
      * @return array
-     * @throws \LaravelWechatpayV3\Kernel\Exceptions\InvalidArgumentException
-     * @throws \LaravelWechatpayV3\Kernel\Exceptions\RuntimeException
+     * @throws \MuCTS\LaravelWeChatPayV3\Kernel\Exceptions\InvalidArgumentException
+     * @throws \MuCTS\LaravelWeChatPayV3\Kernel\Exceptions\RuntimeException
      */
     public function parseResource(array $resource)
     {

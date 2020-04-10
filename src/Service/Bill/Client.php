@@ -1,10 +1,10 @@
 <?php
 
-namespace LaravelWechatpayV3\Service\Bill;
+namespace MuCTS\LaravelWeChatPayV3\Service\Bill;
 
 use Illuminate\Support\Arr;
-use LaravelWechatpayV3\Kernel\BaseClient;
-use LaravelWechatpayV3\Kernel\Exceptions\HashException;
+use MuCTS\LaravelWeChatPayV3\Kernel\BaseClient;
+use MuCTS\LaravelWeChatPayV3\Kernel\Exceptions\HashException;
 
 /**
  * Class Client.

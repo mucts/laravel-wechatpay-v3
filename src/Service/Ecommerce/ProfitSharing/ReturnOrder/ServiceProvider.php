@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelWechatpayV3\Service\Ecommerce\ProfitSharing\ReturnOrder;
+namespace MuCTS\LaravelWeChatPayV3\Service\Ecommerce\ProfitSharing\ReturnOrder;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;

@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelWechatpayV3\Kernel\Traits;
+namespace MuCTS\LaravelWeChatPayV3\Kernel\Traits;
 
 use Psr\Http\Message\ResponseInterface;
 

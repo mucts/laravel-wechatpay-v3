@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelWechatpayV3\Service\Ecommerce\Refund;
+namespace MuCTS\LaravelWeChatPayV3\Service\Ecommerce\Refund;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
