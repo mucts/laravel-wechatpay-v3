@@ -1,6 +1,6 @@
 <?php
 
-namespace MuCTS\LaravelWeChatPayV3\Service\Notify;
+namespace MuCTS\Laravel\WeChatPayV3\Service\Notify;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;

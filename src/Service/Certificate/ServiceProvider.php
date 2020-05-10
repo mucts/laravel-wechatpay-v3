@@ -1,6 +1,6 @@
 <?php
 
-namespace MuCTS\LaravelWeChatPayV3\Service\Certificate;
+namespace MuCTS\Laravel\WeChatPayV3\Service\Certificate;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;

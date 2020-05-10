@@ -1,26 +1,26 @@
 <?php
 
-namespace MuCTS\LaravelWeChatPayV3\Service;
+namespace MuCTS\Laravel\WeChatPayV3\Service;
 
-use MuCTS\LaravelWeChatPayV3\Kernel\ServiceContainer;
+use MuCTS\Laravel\WeChatPayV3\Kernel\ServiceContainer;
 
 /**
  * Class Application.
  *
- * @property \MuCTS\LaravelWeChatPayV3\Service\Certificate\Client $certificate
- * @property \MuCTS\LaravelWeChatPayV3\Service\Notify\Client $notify
- * @property \MuCTS\LaravelWeChatPayV3\Service\Apply4Sub\SubMerchant\Client $subMerchant
- * @property \MuCTS\LaravelWeChatPayV3\Service\Merchant\Media\Client $media
- * @property \MuCTS\LaravelWeChatPayV3\Service\CombineTransaction\Client $combineTransaction
- * @property \MuCTS\LaravelWeChatPayV3\Service\Ecommerce\Applyment\Client $applyment
- * @property \MuCTS\LaravelWeChatPayV3\Service\Ecommerce\ProfitSharing\Order\Client $profitSharingOrder
- * @property \MuCTS\LaravelWeChatPayV3\Service\Ecommerce\ProfitSharing\ReturnOrder\Client $profitSharingReturnOrder
- * @property \MuCTS\LaravelWeChatPayV3\Service\Ecommerce\ProfitSharing\FinishOrder\Client $profitSharingFinishOrder
- * @property \MuCTS\LaravelWeChatPayV3\Service\Ecommerce\Subsidy\Client $subsidy
- * @property \MuCTS\LaravelWeChatPayV3\Service\Ecommerce\Refund\Client $refund
- * @property \MuCTS\LaravelWeChatPayV3\Service\Ecommerce\Fund\Withdraw\Client $withdraw
- * @property \MuCTS\LaravelWeChatPayV3\Service\Ecommerce\Fund\Balance\Client $balance
- * @property \MuCTS\LaravelWeChatPayV3\Service\Bill\Client $bill
+ * @property \MuCTS\Laravel\WeChatPayV3\Service\Certificate\Client $certificate
+ * @property \MuCTS\Laravel\WeChatPayV3\Service\Notify\Client $notify
+ * @property \MuCTS\Laravel\WeChatPayV3\Service\Apply4Sub\SubMerchant\Client $subMerchant
+ * @property \MuCTS\Laravel\WeChatPayV3\Service\Merchant\Media\Client $media
+ * @property \MuCTS\Laravel\WeChatPayV3\Service\CombineTransaction\Client $combineTransaction
+ * @property \MuCTS\Laravel\WeChatPayV3\Service\Ecommerce\Applyment\Client $applyment
+ * @property \MuCTS\Laravel\WeChatPayV3\Service\Ecommerce\ProfitSharing\Order\Client $profitSharingOrder
+ * @property \MuCTS\Laravel\WeChatPayV3\Service\Ecommerce\ProfitSharing\ReturnOrder\Client $profitSharingReturnOrder
+ * @property \MuCTS\Laravel\WeChatPayV3\Service\Ecommerce\ProfitSharing\FinishOrder\Client $profitSharingFinishOrder
+ * @property \MuCTS\Laravel\WeChatPayV3\Service\Ecommerce\Subsidy\Client $subsidy
+ * @property \MuCTS\Laravel\WeChatPayV3\Service\Ecommerce\Refund\Client $refund
+ * @property \MuCTS\Laravel\WeChatPayV3\Service\Ecommerce\Fund\Withdraw\Client $withdraw
+ * @property \MuCTS\Laravel\WeChatPayV3\Service\Ecommerce\Fund\Balance\Client $balance
+ * @property \MuCTS\Laravel\WeChatPayV3\Service\Bill\Client $bill
  */
 class Application extends ServiceContainer
 {

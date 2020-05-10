@@ -1,18 +1,18 @@
 <?php
 
-namespace MuCTS\LaravelWeChatPayV3\Kernel;
+namespace MuCTS\Laravel\WeChatPayV3\Kernel;
 
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Psr7;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
-use MuCTS\LaravelWeChatPayV3\Kernel\Exceptions\SignInvalidException;
-use MuCTS\LaravelWeChatPayV3\Kernel\Traits\HasHttpRequests;
-use MuCTS\LaravelWeChatPayV3\Kernel\Traits\ResponseCastable;
-use MuCTS\LaravelWeChatPayV3\Kernel\Traits\RestfulMethods;
-use MuCTS\LaravelWeChatPayV3\Kernel\Traits\SignatureGenerator;
-use MuCTS\LaravelWeChatPayV3\Kernel\Utils\RsaUtil;
+use MuCTS\Laravel\WeChatPayV3\Kernel\Exceptions\SignInvalidException;
+use MuCTS\Laravel\WeChatPayV3\Kernel\Traits\HasHttpRequests;
+use MuCTS\Laravel\WeChatPayV3\Kernel\Traits\ResponseCastable;
+use MuCTS\Laravel\WeChatPayV3\Kernel\Traits\RestfulMethods;
+use MuCTS\Laravel\WeChatPayV3\Kernel\Traits\SignatureGenerator;
+use MuCTS\Laravel\WeChatPayV3\Kernel\Utils\RsaUtil;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 

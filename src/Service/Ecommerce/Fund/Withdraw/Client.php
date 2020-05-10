@@ -1,8 +1,8 @@
 <?php
 
-namespace MuCTS\LaravelWeChatPayV3\Service\Ecommerce\Fund\Withdraw;
+namespace MuCTS\Laravel\WeChatPayV3\Service\Ecommerce\Fund\Withdraw;
 
-use MuCTS\LaravelWeChatPayV3\Kernel\BaseClient;
+use MuCTS\Laravel\WeChatPayV3\Kernel\BaseClient;
 
 /**
  * Class Client.

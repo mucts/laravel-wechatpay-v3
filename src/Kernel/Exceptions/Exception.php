@@ -1,6 +1,6 @@
 <?php
 
-namespace MuCTS\LaravelWeChatPayV3\Kernel\Exceptions;
+namespace MuCTS\Laravel\WeChatPayV3\Kernel\Exceptions;
 
 use Exception as BaseException;
 

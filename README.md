@@ -17,13 +17,13 @@ $ composer require mucts/laravel-wechatpay-v3:^1.0
 
 在 `bootstrap/app.php` 中增加：
 ```php
-$app->register(MuCTS\LaravelWeChatPayV3\ServiceProvider::class);
+$app->register(MuCTS\Laravel\WeChatPayV3\ServiceProvider::class);
 ```
 
 ## 使用
 ### API 列表
 ```php
-use MuCTS\LaravelWeChatPayV3\Facades\WeChatPay;
+use MuCTS\Laravel\WeChatPayV3\Facades\WeChatPay;
 
 $weChatPay = WeChatPay::app();
 

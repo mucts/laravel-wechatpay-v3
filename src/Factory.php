@@ -1,8 +1,8 @@
 <?php
 
-namespace MuCTS\LaravelWeChatPayV3;
+namespace MuCTS\Laravel\WeChatPayV3;
 
-use MuCTS\LaravelWeChatPayV3\Service\Application;
+use MuCTS\Laravel\WeChatPayV3\Service\Application;
 
 class Factory
 {

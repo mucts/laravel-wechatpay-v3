@@ -1,7 +1,7 @@
 <?php
 
 
-namespace MuCTS\LaravelWeChatPayV3\Auth;
+namespace MuCTS\Laravel\WeChatPayV3\Auth;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;

@@ -1,12 +1,12 @@
 <?php
 
-namespace MuCTS\LaravelWeChatPayV3\Kernel\Traits;
+namespace MuCTS\Laravel\WeChatPayV3\Kernel\Traits;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Str;
-use MuCTS\LaravelWeChatPayV3\Kernel\Certificate;
-use MuCTS\LaravelWeChatPayV3\Kernel\Exceptions\SignInvalidException;
+use MuCTS\Laravel\WeChatPayV3\Kernel\Certificate;
+use MuCTS\Laravel\WeChatPayV3\Kernel\Exceptions\SignInvalidException;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 

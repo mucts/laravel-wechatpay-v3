@@ -1,6 +1,6 @@
 <?php
 
-namespace MuCTS\LaravelWeChatPayV3\Service\Ecommerce\ProfitSharing\FinishOrder;
+namespace MuCTS\Laravel\WeChatPayV3\Service\Ecommerce\ProfitSharing\FinishOrder;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;

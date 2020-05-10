@@ -24,21 +24,21 @@
     },
     "autoload": {
         "psr-4": {
-            "MuCTS\\LaravelWeChatPayV3\\": "src"
+            "MuCTS\\Laravel\\WeChatPayV3\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "MuCTS\\LaravelWeChatPayV3\\Test\\": "tests"
+            "MuCTS\\Laravel\\WeChatPayV3\\Test\\": "tests"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "MuCTS\\LaravelWeChatPayV3\\ServiceProvider"
+                "MuCTS\\Laravel\\WeChatPayV3\\ServiceProvider"
             ],
             "aliases": {
-                "WeChatPayV3": "MuCTS\\LaravelWeChatPayV3\\Facades\\WeChatPayV3"
+                "WeChatPayV3": "MuCTS\\Laravel\\WeChatPayV3\\Facades\\WeChatPayV3"
             }
         }
     },
