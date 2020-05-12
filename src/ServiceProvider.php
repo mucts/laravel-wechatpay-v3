@@ -2,10 +2,11 @@
 
 namespace MuCTS\Laravel\WeChatPayV3;
 
+use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Foundation\Application as LaravelApplication;
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
 
-class ServiceProvider extends LaravelServiceProvider
+class ServiceProvider extends LaravelServiceProvider implements DeferrableProvider
 {
     /**
      * Boot the provider.
